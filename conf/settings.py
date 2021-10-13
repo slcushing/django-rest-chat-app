@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'django-rest-chat-app.herokuapp.com/'
+    'django-rest-chat-app.herokuapp.com'
     ]
 
 
