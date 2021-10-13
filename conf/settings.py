@@ -47,6 +47,8 @@ INSTALLED_APPS = [
 
     #local
     'frontend.apps.FrontendConfig',
+    'api.apps.ApiConfig',
+    'chats.apps.ChatsConfig',
 ]
 
 MIDDLEWARE = [
