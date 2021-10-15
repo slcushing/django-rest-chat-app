@@ -1,6 +1,7 @@
 //what does it mean to be a message
 //in chats app, in models a message is : body, room, user
 import {useState} from 'react';
+import RoomSideBar from '../RoomSideBar/RoomSideBar';
 
 function MessageForm(props) {
    const [newMessage, setNewMessage] = useState({});
@@ -24,7 +25,7 @@ function MessageForm(props) {
         <div className= "form-group mb-2">
             <textarea id='body' 
                         name='body' 
-                        placeholder='Message "ROOMNAME"' 
+                        placeholder='Message here'
                         onChange={handleChange}>
 
             </textarea>
