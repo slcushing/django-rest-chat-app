@@ -12,7 +12,10 @@ class Room(models.Model):
 
 class Message(models.Model):
     body = models.TextField()
-    room = models.ForeignKey(Room, on_delete= models.CASCADE)
+    room = models.ForeignKey(Room, related_name="messages", on_delete= models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.body
 
     
