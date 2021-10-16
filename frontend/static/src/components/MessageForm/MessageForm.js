@@ -1,7 +1,4 @@
-//what does it mean to be a message
-//in chats app, in models a message is : body, room, user
 import {useState} from 'react';
-import RoomSideBar from '../RoomSideBar/RoomSideBar';
 
 function MessageForm(props) {
    const [newMessage, setNewMessage] = useState({});
@@ -25,9 +22,8 @@ function MessageForm(props) {
         <div className= "form-group mb-2">
             <textarea id='body' 
                         name='body' 
-                        placeholder='Message here'
+                        placeholder="Message here"
                         onChange={handleChange}>
-
             </textarea>
         </div>
         <button type="submit" name={props.user} onSubmit={handleChange}>Send</button>
@@ -37,20 +33,5 @@ function MessageForm(props) {
     )
     
 }
-
-// async function SendMessage(body, room, user) {
-//     const newMessage = {body, room, user};
-//     const response = await fetch('', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(newMessage),
-//     });
-
-//     if (response.ok) {
-//         console.log("message sent")
-//     };
-// }
 
 export default MessageForm

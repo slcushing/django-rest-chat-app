@@ -5,12 +5,14 @@ import Cookies from 'js-cookie';
 import { useState,useEffect } from 'react';
 import RoomSideBar from '../RoomSideBar/RoomSideBar';
 import MessageListView from '../MessageListView/MessageListView';
+import LoginForm from '../LoginForm/LoginForm';
 
 
 function App() {
   const handleError = (err) => console.warn(err);
   const [roomList, setRoomList] = useState([])
   const [messageList, setMessagesFromRoom] = useState([])
+  
 
   const handleRegistration = async (user) => {
     const options = {
@@ -24,12 +26,34 @@ function App() {
 
     const response = await fetch('/rest-auth/registration/', options).catch(handleError);
     if(!response) {
-      console.warm(response);
+      console.warn(response);
     } else {
       const data = await response.json();
       Cookies.set('Authorization', `Token ${data.key}`)
     }
   }
+
+  const handleLogin = async (user) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRToken': Cookies.get('csrftoken'),
+      },
+      body: JSON.stringify(user)
+    }
+    
+    const response = await fetch('/rest-auth/login/', options).catch(handleError);
+    if(!response) {
+      console.warn(response);
+    } else {
+      const data = await response.json();
+      Cookies.set('Authorization',`Token ${data.key}`)
+    }
+ 
+  }
+
+
 
   useEffect(() => {
     async function getRoomList() {
@@ -42,10 +66,8 @@ function App() {
 
   
   async function getMessages(e) {
-    console.log('here')
     const response = await fetch(`/api_v1/chats/rooms/${e.target.value}/`);
     const data = await response.json();
-    // console.log('data', data);
     setMessagesFromRoom(data.messages);
   };
 
@@ -68,6 +90,7 @@ function App() {
   return (
     <div className="container">
       <RegistrationForm handleRegistration={handleRegistration}/>
+      <LoginForm handleLogin={handleLogin}/>
       <RoomSideBar roomList={roomList} getMessages={getMessages}/>
       <MessageListView messageList={messageList}/>
       <MessageForm handleMessage={handleMessage}/>
