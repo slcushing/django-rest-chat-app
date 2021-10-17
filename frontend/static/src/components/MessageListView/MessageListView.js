@@ -1,12 +1,16 @@
 function MessageListView(props) {
     const messageListViewHTML = props.messageList.map((message) => (
-        <div key={message.id}>
+        <div className="message-body" key={message.id}>
             {message.body}
         </div>
     ));
 
     return (
-        <section>{messageListViewHTML}</section>
+        <section className="message-list-view">
+           
+            {messageListViewHTML}
+            
+        </section>
     )
 }
 

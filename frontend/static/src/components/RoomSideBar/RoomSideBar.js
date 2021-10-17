@@ -1,6 +1,8 @@
+import RoomForm from "./RoomForm";
+
 function RoomSideBar(props) {
 const roomListSideBarHTML = props.roomList.map((room) => (
-    <li className='btn-group-vertical' key={room.id}>
+    <li className='room-button' key={room.id}>
         <button value={room.id}
                 className='mt-2'
                 type='button'
@@ -12,9 +14,9 @@ const roomListSideBarHTML = props.roomList.map((room) => (
     ));
 
     return (
-        <aside>
+        <aside className="room-side-bar">
             <ul>{roomListSideBarHTML}</ul>
-
+            <RoomForm />
         </aside>
     );
     }

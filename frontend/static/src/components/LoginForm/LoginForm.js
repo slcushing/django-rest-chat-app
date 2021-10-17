@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 function LoginForm(props) {
-    const [user, setReturningUser] = useState ({
+    const [user, setUser] = useState ({
         username:'',
         email:'',
         password:'',
@@ -11,7 +11,7 @@ function LoginForm(props) {
 
     const handleChange = (e) => {
         const {name, value} = e.target;
-        setReturningUser(prevState => ({
+        setUser(prevState => ({
             ...prevState,
             [name]: value,
         }));
@@ -19,12 +19,14 @@ function LoginForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(user.password !== user.password){
-            //need to target user password that they already created
-            setError('Incorrect password')
-        } else {
-            props.handleLogin(user)
-        }
+        // if(user.password !== user.password){
+        //     //need to target user password that they already created
+        //     setError('Incorrect password')
+        // } else {
+        props.handleLogin(user);
+        setUser(user);
+       
+        
     }
 
     return (

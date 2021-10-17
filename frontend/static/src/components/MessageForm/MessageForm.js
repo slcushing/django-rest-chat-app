@@ -3,7 +3,7 @@ import {useState} from 'react';
 function MessageForm(props) {
    const [newMessage, setNewMessage] = useState({});
 
-//the below could potentially change
+
     const handleChange = (e) => {
         const {message, value} = e.target;
         setNewMessage(prevState => ({
@@ -26,7 +26,7 @@ function MessageForm(props) {
                         onChange={handleChange}>
             </textarea>
         </div>
-        <button type="submit" name={props.user} onSubmit={handleChange}>Send</button>
+        <button type="submit" name={props.user} onChange={handleChange}>Send</button>
 
         </form>
 
