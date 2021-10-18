@@ -1,26 +1,35 @@
 
-.container {
-  /* background: url('https://c4.wallpaperflare.com/wallpaper/149/768/925/computer-90s-microsoft-windows-vintage-wallpaper-preview.jpg');
-  background-size: fill;
-  background-position: left center;
-  background-repeat: no-repeat; */
+#root {
+  background: url('https://media.wnyc.org/i/800/0/h/85/1/aol.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   font-family: Arial, Helvetica, sans-serif;
-  display:flex;
-  flex-direction: column;
 }
 
-header {
-  display: flex;
-  height: 2em;
+.header {
+  height: 3em;
   width: 100%;
-  background-color: blue;
-  color:white; 
+  padding: 0 5px;
+  background: #08216b;
+  background:linear-gradient(left, #08216b , #a5c6ef);
+  background:linear-gradient(right, #08216b, #a5c6ef);
+  background:linear-gradient(right, #08216b, #a5c6ef);
+  background:linear-gradient(to right, #08216b , #a5c6ef);
+  color: white;
+  font-weight:bold;
+  font-size: 20px;
 }
 
+.container {
+  display:flex;
+
+}
 .room-side-bar{
   border: solid 1px black;
-  width: 20%;
   margin-top: 2em;
+  height:20%;
+  background-color: #FEF8EF;
 }
 
 .room-side-bar ul {
@@ -32,13 +41,63 @@ header {
   flex-direction: column;
 }
 
-.message-list-view {
+.message-container {
   border: solid 1px black;
   width: 70%;
   height: 100vh;
   display:flex;
   flex-direction: column;
-  margin-top: 2em;
-  margin-left:30%;
+  justify-items: flex-end;
+  margin: 2em;
+  background-color: #FEF8EF;
+}
+
+.message-window-header {
+  height: 2em;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 5px;
+  background: #08216b;
+  background:linear-gradient(left, #08216b , #a5c6ef);
+  background:linear-gradient(right, #08216b, #a5c6ef);
+  background:linear-gradient(right, #08216b, #a5c6ef);
+  background: linear-gradient(to right, #08216b , #a5c6ef);
+  height: 35px;
+  color: white;
+}
+
+.rooms-container {
+  display:flex;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 2px;
+}
+
+.form-group button {
+  width: 5em;
 
 }
+
+.text-area {
+  width: 100%;
+}
+
+.rooms-header {
+  padding: 0 5px;
+  background: #08216b;
+  background:linear-gradient(left, #08216b , #a5c6ef);
+  background:linear-gradient(right, #08216b, #a5c6ef);
+  background:linear-gradient(right, #08216b, #a5c6ef);
+  background: linear-gradient(to right, #08216b , #a5c6ef);
+  height: 35px;
+  color: white;
+  font-weight: bold;
+}
+
+
+
+/* https://c4.wallpaperflare.com/wallpaper/149/768/925/computer-90s-microsoft-windows-vintage-wallpaper-preview.jpg */

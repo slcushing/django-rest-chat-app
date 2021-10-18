@@ -19,15 +19,15 @@ function MessageForm(props) {
 
     return (
         <form className='mt-2' onSubmit = {handleSubmit}>
-        <div className= "form-group mb-2">
+        <div className= "form-group">
             <textarea id='body' 
+                        className="text-area"
                         name='body' 
                         placeholder="Message here"
                         onChange={handleChange}>
             </textarea>
+            <button type="submit" name={props.user} onChange={handleChange}>Send</button>
         </div>
-        <button type="submit" name={props.user} onChange={handleChange}>Send</button>
-
         </form>
 
     )

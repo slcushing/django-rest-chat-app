@@ -15,6 +15,7 @@ const roomListSideBarHTML = props.roomList.map((room) => (
 
     return (
         <aside className="room-side-bar">
+            <header className="rooms-header">Chat Rooms</header>
             <ul>{roomListSideBarHTML}</ul>
             <RoomForm />
         </aside>

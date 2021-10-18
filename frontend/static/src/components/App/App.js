@@ -15,6 +15,7 @@ function App() {
   const [roomList, setRoomList] = useState([])
   const [messageList, setMessagesFromRoom] = useState([])
   const [selectedRoom, setSelectedRoom] = useState({id:0, title:'room0'});
+  const [selection, setSelection] = useState(!!Cookies.get('Authorization') ? 'messages' : 'login');
   
 
   const handleRegistration = async (user) => {
@@ -32,7 +33,8 @@ function App() {
       console.warn(response);
     } else {
       const data = await response.json();
-      Cookies.set('Authorization', `Token ${data.key}`)
+      Cookies.set('Authorization', `Token ${data.key}`);
+      setSelection('messages');
     }
   }
 
@@ -41,31 +43,29 @@ function App() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-CSRToken': Cookies.get('csrftoken'),
-      }, 
+        'X-CSRFToken': Cookies.get('csrftoken'),
+      },
       body: JSON.stringify(user),
     }
+
     const response = await fetch('/rest-auth/login/', options).catch(handleError);
     if(!response) {
       console.warn(response);
     } else {
       const data = await response.json();
-      Cookies.set('Authorization',`Token ${data.key}`);
-      if (data.key) {
-
-      } else {
-        Cookies.remove('Authorization');
-      }
+      Cookies.set('Authorization', `Token ${data.key}`);
+      setSelection('messages');
     }
   }   
+
+  const getRoomList = async () => {
+    const response = await fetch(`/api_v1/chats/rooms`);
+    const data = await response.json();
+    setRoomList(data);
+  }
   
 
   useEffect(() => {
-    async function getRoomList() {
-      const response = await fetch(`/api_v1/chats/rooms`);
-      const data = await response.json();
-      setRoomList(data);
-    };
     getRoomList();
   }, [])
 
@@ -83,6 +83,7 @@ function App() {
 
 
   async function handleMessage(user, body){
+    
     const newMessage = {
       user: user, 
       room: selectedRoom.id,
@@ -100,8 +101,42 @@ function App() {
     });
     if(response.ok){
       return response.json(); 
-}  
+    }  
   }
+
+
+  return (
+    <>
+    {selection === 'login' &&  <LoginForm handleLogin={handleLogin}/>}
+    {selection === 'registration' && <RegistrationForm handleRegistration={handleRegistration}/>}
+    {selection === 'messages' && (
+       <div className="app">
+       <header className="header">The Return of AIM </header>
+       <div className="container">
+ 
+         <div className="message-container">
+           <header className="message-window-header">Message Window</header>
+           <MessageListView messageList={messageList} selectedRoom={selectedRoom}/>
+           <MessageForm handleMessage={handleMessage}/>
+         </div>
+         <div className="rooms-container">
+           <RoomSideBar roomList={roomList} getMessages={getMessages}/>
+         </div>
+       </div>
+     </div>
+    )}
+    </>
+  );
+}
+
+export default App;
+
+
+// {<RegistrationForm handleRegistration={handleRegistration}/>
+// <LoginForm handleLogin={handleLogin}/>
+// <MessageForm handleMessage={handleMessage}/>
+{/* <button className="btn-logout" onClick={() => {setDisable(true); setSelection('LogOut')}}> Log Out </button>} */}
+
 
   // const [disable, setDisable] = useState(false)
   // const [selection, setSelection] = useState('RegistrationForm', 'LoginForm')
@@ -118,27 +153,3 @@ function App() {
   // } else if (selection === 'LogOut') {
   //   html = <LogOut />
   // }
-
-
-  return (
-    <div className="container">
-      <header className="header">The Return of AIM </header>
-      
-      {/* <RegistrationForm handleRegistration={handleRegistration}/>
-      <LoginForm handleLogin={handleLogin}/> */}
-      <RoomSideBar roomList={roomList} getMessages={getMessages}/>
-      {/* <RoomForm setRoomList={setRoomList} roomList={roomList}/> */}
-      <MessageListView messageList={messageList} selectedRoom={selectedRoom}/>
-      <MessageForm handleMessage={handleMessage}/>
-      
-    </div>
-  );
-}
-
-export default App;
-
-
-// {<RegistrationForm handleRegistration={handleRegistration}/>
-// <LoginForm handleLogin={handleLogin}/>
-// <MessageForm handleMessage={handleMessage}/>
-{/* <button className="btn-logout" onClick={() => {setDisable(true); setSelection('LogOut')}}> Log Out </button>} */}

@@ -38,7 +38,7 @@ function RoomForm(props) {
     return (
         
         <div>
-            <form className='mt-3' onSubmit = {handleSubmit}>   
+            <form className='room-add' onSubmit = {handleSubmit}>   
             <input type="text"
                     id="text"
                     placeholder="Add New Room"
