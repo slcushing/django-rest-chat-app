@@ -7,7 +7,7 @@ import RoomSideBar from '../RoomSideBar/RoomSideBar';
 import RoomForm from '../RoomSideBar/RoomForm';
 import MessageListView from '../MessageListView/MessageListView';
 import LoginForm from '../LoginForm/LoginForm';
-// import LogOut from '../LogOut/LogOut';
+
 
 
 function App() {
@@ -104,6 +104,12 @@ function App() {
     }  
   }
 
+  const handleLogout = () => {
+    
+    Cookies.remove('Authorization');
+    setSelection('login');
+  }
+
 
   return (
     <>
@@ -112,6 +118,7 @@ function App() {
     {selection === 'messages' && (
        <div className="app">
        <header className="header">The Return of AIM </header>
+       <button type="button" onClick={handleLogout}>Log Out</button>
        <div className="container">
  
          <div className="message-container">
@@ -132,24 +139,8 @@ function App() {
 export default App;
 
 
-// {<RegistrationForm handleRegistration={handleRegistration}/>
+// <RegistrationForm handleRegistration={handleRegistration}/>
 // <LoginForm handleLogin={handleLogin}/>
 // <MessageForm handleMessage={handleMessage}/>
-{/* <button className="btn-logout" onClick={() => {setDisable(true); setSelection('LogOut')}}> Log Out </button>} */}
 
 
-  // const [disable, setDisable] = useState(false)
-  // const [selection, setSelection] = useState('RegistrationForm', 'LoginForm')
-  // let html;
-
-  // if(selection === 'LoginForm') {
-  //   html = <LoginForm handleLogin={handleLogin}/>
-  // } else if (selection === 'MessageForm'){
-  //   html = <MessageForm handleMessage={handleMessage}/>
-  // } else if (selection === 'RegistrationForm') {
-  //   html = <RegistrationForm handleRegistration={handleRegistration}/>
-  // } else if (selection === 'MessageListView') {
-  //   html = <MessageListView messageList={messageList} selectedRoom={selectedRoom}/>
-  // } else if (selection === 'LogOut') {
-  //   html = <LogOut />
-  // }
